@@ -1,4 +1,4 @@
-# House of Bichen: Landing Page
+# Celadon Eave: Landing Page
 
 Static site (HTML/CSS/JS), no build step.
 

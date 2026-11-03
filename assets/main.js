@@ -1,5 +1,18 @@
 // Celadon Eave — page behaviour
 
+// Compact sticky header after the first bit of scroll
+(function () {
+  var ticking = false;
+  function update() {
+    document.body.classList.toggle('is-scrolled', window.scrollY > 40);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
+})();
+
 // Reveal on scroll
 (function () {
   var els = document.querySelectorAll('.reveal');

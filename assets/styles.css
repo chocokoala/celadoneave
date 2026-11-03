@@ -1,0 +1,17 @@
+:root {
+  --sage: #F4F5EB;
+  --blush: #FAF4F0;
+  --sand: #DAD7C5;
+  --mist: #D0DDD7;
+  --rouge: #AE6070;
+  --terracotta: #A45646;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--sage);
+  color: #2a2a2a;
+  font-family: "Google Sans", system-ui, sans-serif;
+}
+h1, h2, h3 { font-family: "Alice", serif; font-weight: 400; }
+.hero { min-height: 80vh; display: grid; place-content: center; text-align: center; padding: 16px; }

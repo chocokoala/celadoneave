@@ -102,14 +102,24 @@ p { text-wrap: pretty; }
 .is-scrolled .site-header .btn-outline { transform: translateY(-29px); }
 :target, [id] { scroll-margin-top: 110px; }
 
+/* Desktop compact bar: slimmer, 77px (was 98px), everything scaled down together */
+@media (min-width: 761px) {
+  .is-scrolled .site-header { height: 77px; }
+  .is-scrolled .logo-svg { transform: translateY(-6.7px) scale(.786); transform-origin: 0 0; }
+  .is-scrolled .nav-links { transform: translate(-25px, -13.5px); }
+  .is-scrolled .site-header .btn-outline { transform: translateY(-32.5px); width: 190px; height: 52px; font-size: 16px; }
+  :target, [id] { scroll-margin-top: 90px; }
+}
+
 .nav-links {
   display: flex; gap: 72px;
   margin: 12px 0 0 80px;
   font-size: 16px; line-height: 20px;
 }
+.nav-links { transition: transform .4s ease; }
 .nav-links a { text-decoration: none; transition: color .2s ease; }
 .nav-links a:hover { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
-.site-header .btn-outline { margin: 15px 0 0 auto; transition: transform .4s ease, background-color .2s ease, color .2s ease; }
+.site-header .btn-outline { margin: 15px 0 0 auto; transition: transform .4s ease, width .4s ease, height .4s ease, font-size .4s ease, background-color .2s ease, color .2s ease; }
 
 /* ---------- Hero ---------- */
 .hero {

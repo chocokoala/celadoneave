@@ -158,19 +158,12 @@
         </div>
         <label class="sr-only" for="cf-email">Email</label>
         <input id="cf-email" name="email" type="email" placeholder="Email" autocomplete="email" required>
-        <label class="sr-only" for="cf-place">Country / City</label>
-        <select id="cf-place" name="location">
-          <option value="" selected disabled>Country / City</option>
-          <option>United States, New York</option>
-          <option>United States, San Francisco</option>
-          <option>United States, other</option>
-          <option>United Kingdom, London</option>
-          <option>China, Beijing</option>
-          <option>China, Shenzhen</option>
-          <option>China, Jingdezhen</option>
-          <option>China, other</option>
-          <option>Other</option>
-        </select>
+        <label class="sr-only" for="cf-place">City</label>
+        <div class="place-field">
+          <input id="cf-place" name="location" type="text" placeholder="City" autocomplete="off" autocapitalize="words" spellcheck="false"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="cf-place-list">
+          <ul id="cf-place-list" class="place-list" role="listbox" hidden></ul>
+        </div>
         <label class="sr-only" for="cf-msg">Message</label>
         <textarea id="cf-msg" name="message" placeholder="Message" rows="8"></textarea>
         <button type="submit" class="btn btn-pink">Submit</button>

@@ -60,6 +60,81 @@ document.querySelectorAll('.js-focus-signup').forEach(function (link) {
   });
 });
 
+// City autocomplete for the contact form: type a city, pick "City, Country".
+// Uses assets/cities.txt (cities of 15k+ people, "Name|CC" per line, biggest first). Anything typed is still accepted.
+(function () {
+  var input = document.getElementById('cf-place');
+  var list = document.getElementById('cf-place-list');
+  if (!input || !list) return;
+  var cities = null, loading = false, active = -1, shown = [];
+  var names = window.Intl && Intl.DisplayNames ? new Intl.DisplayNames(['en'], { type: 'region' }) : null;
+  var OVERRIDE = { US: 'USA', GB: 'UK' };
+  function country(cc) {
+    if (OVERRIDE[cc]) return OVERRIDE[cc];
+    try { return names ? names.of(cc) : cc; } catch (e) { return cc; }
+  }
+  function fold(s) { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
+  function load() {
+    if (cities || loading) return;
+    loading = true;
+    fetch('assets/cities.txt').then(function (r) { return r.text(); }).then(function (t) {
+      cities = t.split('\n').map(function (l) {
+        var p = l.split('|');
+        return { n: p[0], c: p[1], f: fold(p[0]) };
+      });
+      if (document.activeElement === input) render();
+    }).catch(function () { loading = false; });
+  }
+  function close() { list.hidden = true; input.setAttribute('aria-expanded', 'false'); active = -1; }
+  function pick(i) {
+    var m = shown[i]; if (!m) return;
+    input.value = m.n + ', ' + country(m.c);
+    close();
+  }
+  function highlight() {
+    Array.prototype.forEach.call(list.children, function (li, i) {
+      li.setAttribute('aria-selected', i === active ? 'true' : 'false');
+    });
+  }
+  function render() {
+    var q = fold(input.value.trim());
+    if (!cities || q.length < 2) { close(); return; }
+    var starts = [], words = [];
+    for (var i = 0; i < cities.length && starts.length < 6; i++) {
+      var f = cities[i].f;
+      if (f.indexOf(q) === 0) starts.push(cities[i]);
+      else if (words.length < 6 && f.indexOf(' ' + q) > -1) words.push(cities[i]);
+    }
+    shown = starts.concat(words).slice(0, 6);
+    if (!shown.length) { close(); return; }
+    list.innerHTML = '';
+    shown.forEach(function (m, i) {
+      var li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.appendChild(document.createTextNode(m.n + ', '));
+      var span = document.createElement('span');
+      span.className = 'place-country';
+      span.textContent = country(m.c);
+      li.appendChild(span);
+      li.addEventListener('mousedown', function (ev) { ev.preventDefault(); pick(i); });
+      list.appendChild(li);
+    });
+    active = -1;
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  input.addEventListener('focus', load);
+  input.addEventListener('input', function () { load(); render(); });
+  input.addEventListener('blur', close);
+  input.addEventListener('keydown', function (ev) {
+    if (list.hidden) return;
+    if (ev.key === 'ArrowDown') { ev.preventDefault(); active = (active + 1) % shown.length; highlight(); }
+    else if (ev.key === 'ArrowUp') { ev.preventDefault(); active = (active - 1 + shown.length) % shown.length; highlight(); }
+    else if (ev.key === 'Enter' && active > -1) { ev.preventDefault(); pick(active); }
+    else if (ev.key === 'Escape') { close(); }
+  });
+})();
+
 // Forms: sent to a Google Apps Script web app that appends rows to a Google Sheet
 // (tab "Signups" for the hero form, tab "Contact" for the contact form).
 // Paste the web app URL below after deploying the script. While it is empty, forms just show the thank-you message.

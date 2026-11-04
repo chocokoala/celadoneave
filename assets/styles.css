@@ -335,6 +335,17 @@ input:focus, select:focus, textarea:focus {
   background: url(chevron.svg) right 21px center / 22px 14px no-repeat;
   padding-right: 52px; cursor: pointer;
 }
+.place-field { position: relative; }
+.place-list {
+  position: absolute; z-index: 5; left: 0; right: 0; top: calc(100% - 1px);
+  margin: 0; padding: 0; list-style: none;
+  background: var(--white); border: 1px solid var(--ink);
+  font: 18px/20px var(--font-body); color: var(--ink);
+}
+.place-list[hidden] { display: none; }
+.place-list li { padding: 14px 11px; cursor: pointer; }
+.place-list li[aria-selected="true"], .place-list li:hover { background: var(--blush); }
+.place-list .place-country { opacity: .65; }
 .contact-form textarea { height: 260px; padding: 25px 11px 11px; resize: none; }
 .contact-form .btn { width: 263px; margin-top: 1px; }
 

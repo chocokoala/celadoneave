@@ -76,8 +76,12 @@ p { text-wrap: pretty; }
 .btn-pink:hover { background: #FFA6A0; }
 .btn-cream { width: 238px; font-weight: 600; background: var(--cream); }
 .btn-cream:hover { background: var(--white); }
-.btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
+.btn:focus-visible, a:focus-visible {
   outline: 2px solid var(--green); outline-offset: 2px;
+}
+/* Form fields: no second outline, just the single border turning to green */
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: none; border-color: var(--green);
 }
 
 /* ---------- Header ---------- */

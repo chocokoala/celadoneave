@@ -162,10 +162,12 @@ document.querySelectorAll('form').forEach(function (form) {
     data.forEach(function (v, k) { if (k !== 'website') body.append(k, v); });
     body.append('form', form.dataset.form || 'signups');
     body.append('page', location.href);
+    // Show the thank-you straight away; the data goes to the Sheet in the background.
     if (btn) btn.disabled = true;
+    show(okText);
+    form.reset();
     // no-cors: the response can't be read, but a resolved fetch means the request was delivered
-    fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body })
-      .then(function () { show(okText); form.reset(); })
+    fetch(FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body, keepalive: true })
       .catch(function () { show(errText); })
       .then(function () { if (btn) btn.disabled = false; });
   });

@@ -9,20 +9,32 @@
     });
   });
 
-  // Photos fade in once they are on screen and decoded
-  var crops = document.querySelectorAll('.crop');
-  function show(el) {
-    var img = el.querySelector('img');
-    var go = function () { requestAnimationFrame(function () { el.classList.add('is-in'); }); };
-    if (!img || (img.complete && img.naturalWidth)) return go();
-    img.addEventListener('load', go, { once: true });
-    img.addEventListener('error', go, { once: true });
+  // Photos fade in once they are on screen and decoded.
+  // Hero and gallery photos wait for each other so they appear together.
+  function ready(img) {
+    return new Promise(function (res) {
+      if (!img || (img.complete && img.naturalWidth)) return res();
+      img.addEventListener('load', res, { once: true });
+      img.addEventListener('error', res, { once: true });
+    });
   }
-  if (!('IntersectionObserver' in window)) { crops.forEach(show); return; }
+  function reveal(target) {
+    var crops = target.classList.contains('crop') ? [target] : Array.prototype.slice.call(target.querySelectorAll('.crop'));
+    crops.forEach(function (c) { var i = c.querySelector('img'); if (i) i.loading = 'eager'; });
+    Promise.all(crops.map(function (c) { return ready(c.querySelector('img')); })).then(function () {
+      requestAnimationFrame(function () { crops.forEach(function (c) { c.classList.add('is-in'); }); });
+    });
+  }
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.pdp-hero, .g-stage'));
+  var singles = Array.prototype.filter.call(document.querySelectorAll('.crop'), function (c) {
+    return !groups.some(function (g) { return g.contains(c); });
+  });
+  var targets = groups.concat(singles);
+  if (!('IntersectionObserver' in window)) { targets.forEach(reveal); return; }
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { io.unobserve(e.target); show(e.target); }
+      if (e.isIntersecting) { io.unobserve(e.target); reveal(e.target); }
     });
-  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.12 });
-  crops.forEach(function (c) { io.observe(c); });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+  targets.forEach(function (t) { io.observe(t); });
 })();

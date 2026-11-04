@@ -232,7 +232,7 @@
   will-change: opacity, transform;
 }
 .js .crop.is-in > img { opacity: 1; transform: none; }
-.js .pdp-hero .hero-r > img { transition-delay: .25s; }
+.js .pdp-hero .crop > img { transform: none; transition: opacity 1.8s cubic-bezier(.25, .1, .25, 1); }
 @media (prefers-reduced-motion: reduce) {
   .js .crop > img { opacity: 1; transform: none; transition: none; }
 }

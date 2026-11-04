@@ -154,10 +154,16 @@ p { text-wrap: pretty; }
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.medallion-ink { position: absolute; inset: 0; width: 100%; height: 100%; }
-/* the SVG draws in black; the lower half is inverted to white where it overlaps the photo and green panel */
+/* two halves: the top draws dark over white, the bottom is inverted to white over the photo and green panel.
+   The clip lives on the (still) wrapper so the seam stays horizontal while the artwork spins inside it. */
+.medallion-half { position: absolute; inset: 0; display: block; }
 .medallion-top { clip-path: inset(0 0 50% 0); opacity: .9; }
 .medallion-bottom { clip-path: inset(50% 0 0 0); filter: invert(1); }
+.medallion-spin {
+  width: 100%; height: 100%;
+  animation: medallion-spin 48s linear infinite;
+}
+@keyframes medallion-spin { to { transform: rotate(360deg); } }
 
 .feature-media { position: relative; overflow: hidden; }
 .feature-media img {
@@ -339,6 +345,7 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .site-header, .logo-svg, .logo-svg g, .site-header .btn-outline { transition: none; }
+  .medallion-spin { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 

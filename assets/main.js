@@ -63,7 +63,7 @@ document.querySelectorAll('.js-focus-signup').forEach(function (link) {
 // Forms: sent to a Google Apps Script web app that appends rows to a Google Sheet
 // (tab "Signups" for the hero form, tab "Contact" for the contact form).
 // Paste the web app URL below after deploying the script. While it is empty, forms just show the thank-you message.
-var FORM_ENDPOINT = '';
+var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwL_kISG5FESvRcBxNYDGKaeHt_rK_EPEWLvpGiBGIwMrmUpDxuAbCBvZM3FGRiht7SuQ/exec';
 
 document.querySelectorAll('form').forEach(function (form) {
   form.addEventListener('submit', function (ev) {

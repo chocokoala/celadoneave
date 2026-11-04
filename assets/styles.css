@@ -472,3 +472,6 @@ input:focus, select:focus, textarea:focus {
   .footer-bottom span:last-child { text-align: left; }
   .footer-bottom br { display: none; }
 }
+
+/* Spam trap: hidden from people, bots fill it in */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }

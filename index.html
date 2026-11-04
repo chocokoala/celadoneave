@@ -38,7 +38,8 @@
   <section class="hero">
     <h1 class="reveal">Bringing China's finest craft and design to the world.</h1>
     <p class="hero-copy reveal r1">We partner with up-and-coming brands from artists and makers in China to bring the finest quality products to the world. <em>Pre-order opening soon.</em></p>
-    <form class="signup reveal r2" id="signup" data-success="Thank you. You'll be the first to know when pre-orders open.">
+    <form class="signup reveal r2" id="signup" data-form="signups" data-success="Thank you. You'll be the first to know when pre-orders open.">
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
       <label class="sr-only" for="signup-email">Email</label>
       <input type="email" id="signup-email" name="email" placeholder="Email" autocomplete="email" required>
       <button type="submit" class="btn btn-pink">Get first access</button>
@@ -147,8 +148,9 @@
         <p>We’re in beta at the moment and would love to hear from you.</p>
         <p>To get in touch for questions, partnerships, ideas or just to say hi, please fill out the form and we’d be happy to schedule a virtual tea <span class="emoji">🫖</span></p>
       </div>
-      <form class="contact-form reveal r1" data-success="Thank you for the note. We'll write back soon.">
+      <form class="contact-form reveal r1" data-form="contact" data-success="Thank you for the note. We'll write back soon.">
         <div class="field-row">
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label class="sr-only" for="cf-first">First name</label>
           <input id="cf-first" name="first_name" type="text" placeholder="First name" autocomplete="given-name" required>
           <label class="sr-only" for="cf-last">Last name</label>

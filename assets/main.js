@@ -13,6 +13,27 @@
   update();
 })();
 
+// Lotus medallion turns with the scroll (eased so it glides rather than snaps)
+(function () {
+  var el = document.querySelector('.medallion');
+  if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var DEG_PER_PX = 0.25;      // 1440px of scroll = one full turn
+  var current = 0, target = 0, running = false;
+  function frame() {
+    current += (target - current) * 0.12;
+    if (Math.abs(target - current) < 0.05) { current = target; running = false; }
+    el.style.setProperty('--spin', current.toFixed(2) + 'deg');
+    if (running) requestAnimationFrame(frame);
+  }
+  function onScroll() {
+    target = window.scrollY * DEG_PER_PX;
+    if (!running) { running = true; requestAnimationFrame(frame); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  current = target = window.scrollY * DEG_PER_PX;
+  el.style.setProperty('--spin', current.toFixed(2) + 'deg');
+})();
+
 // Reveal on scroll
 (function () {
   var els = document.querySelectorAll('.reveal');

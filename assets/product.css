@@ -6,7 +6,7 @@
   --u: min(1px, calc(100vw / 1440));   /* one design pixel; shrinks gently below 1440 */
 }
 
-.pdp h1, .pdp h2 { font-family: var(--font-head); font-weight: 400; font-size: var(--h2); line-height: 1.25; color: var(--ink); }
+:where(.pdp main) h1, :where(.pdp main) h2 { font-family: var(--font-head); font-weight: 400; font-size: var(--h2); line-height: 1.25; color: var(--ink); }
 .pdp p { text-wrap: pretty; }
 
 /* ---------- Cropped photos: image placed inside its box with percentages taken from the design ---------- */
@@ -166,7 +166,7 @@
 
 /* ================= Desktop: the design as drawn ================= */
 @media (min-width: 1200px) {
-  .pdp h1, .pdp h2 { font-size: 48px; line-height: 60px; }
+  :where(.pdp main) h1, :where(.pdp main) h2 { font-size: 48px; line-height: 60px; }
 
   .pdp-intro-in {
     position: relative; max-width: 1440px; margin: 0 auto;
@@ -224,3 +224,15 @@
   .acc-panel, .acc-ic::before, .acc-ic::after { transition: none; }
 }
 .pdp-copy p { letter-spacing: 0.008em; }
+
+/* ---------- Photos settle in: slow fade with a gentle zoom-out (only when JS runs) ---------- */
+.js .crop > img {
+  opacity: 0; transform: scale(1.06);
+  transition: opacity 1.6s cubic-bezier(.25, .1, .25, 1), transform 2.8s cubic-bezier(.16, .7, .24, 1);
+  will-change: opacity, transform;
+}
+.js .crop.is-in > img { opacity: 1; transform: none; }
+.js .pdp-hero .hero-r > img { transition-delay: .25s; }
+@media (prefers-reduced-motion: reduce) {
+  .js .crop > img { opacity: 1; transform: none; transition: none; }
+}

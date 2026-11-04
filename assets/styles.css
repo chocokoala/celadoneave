@@ -209,8 +209,9 @@ p { text-wrap: pretty; }
   column-gap: 28px;
   align-items: start;
 }
-.heritage-intro { padding-top: 46px; }
-.heritage-intro p { max-width: 480px; }
+.heritage-intro { padding-top: 4px; }
+.heritage-intro p { max-width: 508px; }
+.kicker { font-size: 16.5px; line-height: 20px; text-transform: uppercase; margin-bottom: 12px; }
 .heritage-intro h2 { line-height: 60px; }
 .heritage-intro h2 + p { margin-top: 31px; }
 .heritage-intro p + p { margin-top: 20px; }
@@ -234,7 +235,7 @@ p { text-wrap: pretty; }
 .fig-kiln { max-width: 433px; }
 .fig-kiln img { aspect-ratio: 433 / 406; }
 .fig-kiln figcaption { max-width: 340px; margin-top: 13px; }
-.craft { padding: 182px 0 0 40px; max-width: 580px; }
+.craft { padding: 207px 0 0; max-width: 600px; }
 .craft h3 { font-family: var(--font-head); font-size: 24px; line-height: 30px; }
 .craft p:first-of-type { margin-top: 22px; }
 .craft p + p { margin-top: 20px; }

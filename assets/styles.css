@@ -59,7 +59,7 @@ p { text-wrap: pretty; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   height: 64px; padding: 0 24px;
-  font-family: var(--font-body); font-size: 18px; line-height: 1;
+  font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 1;
   color: var(--green);
   text-decoration: none;
   border: 0; border-radius: 0;
@@ -68,14 +68,13 @@ p { text-wrap: pretty; }
 }
 .btn-outline {
   width: 240px; height: 66px;
-  font-weight: 600;
   border: 1px solid var(--green);
   background: transparent;
 }
 .btn-outline:hover { background: var(--green); color: var(--cream); }
 .btn-pink { background: var(--pink); }
 .btn-pink:hover { background: #FFA6A0; }
-.btn-cream { width: 238px; font-weight: 600; background: var(--cream); }
+.btn-cream { width: 238px; background: var(--cream); }
 .btn-cream:hover { background: var(--white); }
 .btn:focus-visible, a:focus-visible {
   outline: 2px solid var(--green); outline-offset: 2px;
@@ -152,7 +151,7 @@ input:focus, select:focus, textarea:focus {
   background: var(--white);
   font: 18px/1 var(--font-body); color: var(--ink);
 }
-.signup .btn { width: 238px; font-weight: 600; }
+.signup .btn { width: 238px; }
 ::placeholder { color: var(--ink); opacity: 1; }
 
 .form-msg { flex-basis: 100%; display: none; font-size: 15px; line-height: 20px; }

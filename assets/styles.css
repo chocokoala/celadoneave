@@ -113,13 +113,17 @@ p { text-wrap: pretty; }
 
 /* ---------- Hero ---------- */
 .hero {
+  /* fills the first screen; content sits in the middle between the fixed header and the medallion */
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center;
-  padding: 265px var(--gutter) 217px;
+  padding: 130px var(--gutter);
 }
 .hero h1 {
   font-size: 77px; line-height: 86px;
   max-width: 720px; margin: 0 auto;
 }
+.hero h1, .hero-copy, .signup { width: 100%; }
 .hero-copy { max-width: 640px; margin: 34px auto 0; }
 .signup {
   display: flex; justify-content: center; flex-wrap: wrap; gap: 24px;
@@ -387,7 +391,7 @@ p { text-wrap: pretty; }
   .nav-links { display: none; }
   .site-header .btn-outline { width: auto; height: 44px; margin-top: 8px; padding: 0 20px; font-size: 15px; }
 
-  .hero { padding: 156px 20px 128px; }
+  .hero { padding: 92px 20px 92px; }
   .hero h1 { font-size: clamp(38px, 10.6vw, 56px); line-height: 1.12; }
   .hero-copy { margin-top: 24px; }
   .signup { margin-top: 32px; gap: 12px; flex-direction: column; align-items: stretch; max-width: 420px; margin-inline: auto; }

@@ -61,7 +61,7 @@ document.querySelectorAll('.js-focus-signup').forEach(function (link) {
 });
 
 // City autocomplete for the contact form: type a city, pick "City, Country".
-// Uses assets/cities.txt (cities of 15k+ people, "Name|CC" per line, biggest first). Anything typed is still accepted.
+// Uses assets/cities.js (cities of 15k+ people, "Name|CC" per line, biggest first). Anything typed is still accepted.
 (function () {
   var input = document.getElementById('cf-place');
   var list = document.getElementById('cf-place-list');
@@ -77,13 +77,18 @@ document.querySelectorAll('.js-focus-signup').forEach(function (link) {
   function load() {
     if (cities || loading) return;
     loading = true;
-    fetch('assets/cities.txt').then(function (r) { return r.text(); }).then(function (t) {
-      cities = t.split('\n').map(function (l) {
+    // A <script> tag (not fetch) so it also works when the page is opened straight from disk
+    var s = document.createElement('script');
+    s.src = 'assets/cities.js';
+    s.onload = function () {
+      cities = window.CE_CITIES.split('\n').map(function (l) {
         var p = l.split('|');
         return { n: p[0], c: p[1], f: fold(p[0]) };
       });
       if (document.activeElement === input) render();
-    }).catch(function () { loading = false; });
+    };
+    s.onerror = function () { loading = false; };
+    document.head.appendChild(s);
   }
   function close() { list.hidden = true; input.setAttribute('aria-expanded', 'false'); active = -1; }
   function pick(i) {

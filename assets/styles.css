@@ -150,7 +150,7 @@ p { text-wrap: pretty; }
 .medallion {
   position: absolute; z-index: 2;
   left: 50%; top: 0;
-  width: 232px; height: 234px;
+  width: 116px; height: 117px;
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -403,7 +403,7 @@ p { text-wrap: pretty; }
   .signup { margin-top: 32px; gap: 12px; flex-direction: column; align-items: stretch; max-width: 420px; margin-inline: auto; }
   .signup input, .signup .btn { width: 100%; height: 56px; }
 
-  .medallion { width: 150px; height: 151px; }
+  .medallion { width: 75px; height: 76px; }
   .feature { grid-template-columns: 1fr; }
   .feature-media { aspect-ratio: 4 / 5; }
   .feature-body { padding: 48px 20px 64px; }

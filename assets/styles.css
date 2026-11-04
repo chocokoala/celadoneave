@@ -4,6 +4,7 @@
 :root {
   --ink: #4A4A4A;
   --green: #22342B;
+  --sage: #8DA698;          /* form focus */
   --white: #FFFFFF;
   --mist: #F7FBFC;          /* heritage section + light text on dark */
   --brown: #29241D;         /* collection section */
@@ -81,8 +82,8 @@ p { text-wrap: pretty; }
 }
 /* Form fields: no second outline, just the single border turning to green */
 input:focus, select:focus, textarea:focus {
-  outline: none; border-color: var(--green);
-  box-shadow: inset 0 0 0 1px var(--green); /* thickens the one border to 2px, no layout shift */
+  outline: none; border-color: var(--sage);
+  box-shadow: inset 0 0 0 1px var(--sage); /* thickens the one border to 2px, no layout shift */
   background-color: #fff;
 }
 

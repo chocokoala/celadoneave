@@ -1,0 +1,226 @@
+/* Celadon Eave 青檐坊 — product page (Song Inspired Porcelain Dinnerware)
+   Designed at 1440px. Desktop (1200px+) positions come straight from the Figma file and scale
+   with the window via --u (1 design pixel). Below 1200px the page restacks into one column. */
+
+:root {
+  --u: min(1px, calc(100vw / 1440));   /* one design pixel; shrinks gently below 1440 */
+}
+
+.pdp h1, .pdp h2 { font-family: var(--font-head); font-weight: 400; font-size: var(--h2); line-height: 1.25; color: var(--ink); }
+.pdp p { text-wrap: pretty; }
+
+/* ---------- Cropped photos: image placed inside its box with percentages taken from the design ---------- */
+.crop { position: relative; overflow: hidden; aspect-ratio: var(--ar); }
+.crop > img { position: absolute; max-width: none; }
+.ab { position: absolute; left: calc(var(--x) * var(--s, var(--u))); top: calc(var(--y) * var(--s, var(--u))); width: calc(var(--w) * var(--s, var(--u))); }
+.stage { position: relative; width: calc(var(--sw) * var(--s, var(--u))); height: calc(var(--sh) * var(--s, var(--u))); }
+.shape-blob { clip-path: url(#clip-blob); }
+.shape-pill { clip-path: url(#clip-pill); }
+.shape-scallop { clip-path: url(#clip-scallop); }
+
+.credit {
+  position: absolute; z-index: 1; pointer-events: none;
+  font-size: 8px; line-height: 9px; font-style: italic; color: rgba(255, 255, 255, .6);
+}
+
+/* ---------- Header ---------- */
+.pdp-header {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 20px;
+  background: var(--white);
+}
+.pdp-brand { display: block; line-height: 0; }
+.pdp-logo { width: 88px; height: auto; }
+.pdp-nav { display: none; }
+.pdp-header .btn-outline { width: auto; height: 40px; padding: 0 18px; font-size: 15px; }
+
+/* ---------- Hero ---------- */
+.pdp-hero { display: grid; grid-template-columns: 1fr; }
+
+/* ---------- Product intro ---------- */
+.pdp-intro { background: var(--white); }
+.pdp-intro-in { max-width: 640px; margin: 0 auto; padding: 56px 20px 72px; }
+.g-stage { --s: calc((min(100vw, 600px) - 40px) / 562); margin: 0 auto 48px; }
+.pdp-info { max-width: 510px; margin: 0 auto; }
+.pdp-copy p + p { margin-top: 16px; }
+.pdp-info h1 { margin-bottom: 20px; }
+.pdp-safe {
+  display: grid; grid-template-columns: repeat(3, 88px); justify-content: start; column-gap: 24px;
+  margin-top: 44px; text-align: center;
+}
+.pdp-safe li { display: grid; grid-template-rows: 40px auto; justify-items: center; }
+.pdp-safe img { align-self: center; width: auto; height: auto; }
+.pdp-safe span { margin-top: 17px; font-size: 14px; line-height: 15px; }
+.pdp-price { margin-top: 48px; font: 24px/30px var(--font-head); }
+.pdp-note { margin-top: 8px; }
+.pdp-cta { width: 263px; max-width: 100%; margin-top: 33px; }
+
+.pdp-acc { margin-top: 54px; }
+.acc-item { border-top: 1px solid var(--ink); }
+.acc-item:last-child { border-bottom: 1px solid var(--ink); }
+.acc-h { font: inherit; }
+.acc-btn {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  padding: 14px 16px 17px 0;
+  background: none; border: 0; cursor: pointer;
+  font: 500 18px/20px var(--font-body); color: var(--ink); text-align: left;
+}
+.acc-ic { position: relative; flex: none; width: 16px; height: 16px; }
+.acc-ic::before, .acc-ic::after {
+  content: ""; position: absolute; background: var(--ink); transition: transform .25s ease, opacity .25s ease;
+}
+.acc-ic::before { left: 0; top: 7.5px; width: 16px; height: 1px; }
+.acc-ic::after  { left: 7.5px; top: 0; width: 1px; height: 16px; }
+.is-open .acc-ic::after { transform: scaleY(0); opacity: 0; }
+.acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+.is-open .acc-panel { grid-template-rows: 1fr; }
+.acc-panel > div { overflow: hidden; }
+.acc-panel p { max-width: 460px; padding-bottom: 35px; }
+
+/* ---------- Banner + trio ---------- */
+.pdp-banner { position: relative; }
+.credit-banner { left: 14px; top: 12px; }
+.pdp-trio { display: grid; grid-template-columns: 471fr 480fr 489fr; }
+
+/* ---------- Dinner party ---------- */
+.pdp-party { background: var(--mist); }
+.party-in { max-width: 640px; margin: 0 auto; padding: 64px 20px 72px; }
+.party-img { width: 100%; max-width: 367px; margin: 0 auto 40px; }
+.party-text h2 { margin-bottom: 24px; }
+
+/* ---------- Dark section ---------- */
+.pdp-dark { background: var(--brown); color: var(--mist); }
+.pdp-dark h2 { color: var(--mist); }
+.dark-in { max-width: 640px; margin: 0 auto; padding: 72px 20px 80px; }
+.d-a-text h2, .d-b-text h2 { margin-bottom: 24px; }
+.c-stage { --s: calc((min(100vw, 640px) - 40px) / 586); margin: 56px auto 0; }
+.caption { margin-top: 20px; font-size: 14px; line-height: 15px; color: rgba(247, 251, 252, .7); }
+.d-b { margin-top: 80px; }
+.carving-img { width: 100%; max-width: 417px; margin: 0 auto 40px; }
+.d-c { position: relative; margin-top: 72px; padding-bottom: 8%; }
+.potter-img { width: 76%; margin-left: auto; }
+.kiln-img { position: absolute; left: 0; bottom: 0; width: 44%; }
+
+/* ---------- Product details ---------- */
+.pdp-details { background: var(--blush); padding: 72px 20px 80px; text-align: center; }
+.spec-grid {
+  --gap: 20px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px var(--gap);
+  max-width: 1280px; margin: 40px auto 0; text-align: left;
+}
+.spec { position: relative; }
+.spec-tile { position: relative; aspect-ratio: 1; }
+.spec-crop { position: absolute; }
+.spec h3 {
+  margin-top: 23px; padding-top: 23px; border-top: 1px solid var(--ink);
+  font-size: 18px; line-height: 20px; font-weight: 600;
+}
+.spec:nth-child(odd) h3 { margin-right: calc(-1 * var(--gap)); }
+.spec p { margin-top: 17px; }
+.spec h3 + p { margin-top: 17px; }
+.pdp-cta-c { display: flex; margin: 56px auto 0; }
+
+/* ---------- Made to be used ---------- */
+.pdp-made { background: var(--mist); padding: 72px 20px 80px; text-align: center; }
+.made-lede { max-width: 660px; margin: 24px auto 0; line-height: 19px; }
+.seal { width: 148px; height: 148px; margin: 44px auto 0; }
+.made-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-top: 56px; justify-items: center; }
+.made-grid li { display: flex; flex-direction: column; align-items: center; }
+.made-grid img { height: 64px; width: auto; }
+.made-grid p { margin-top: 28px; line-height: 19px; max-width: 260px; }
+
+/* ---------- Closing signup ---------- */
+.pdp-closing { position: relative; overflow: hidden; color: var(--white); text-align: center; padding: 96px 20px 104px; }
+.closing-crop { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+.closing-crop > img { left: 0 !important; top: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover; }
+.closing-shade { position: absolute; inset: 0; background: rgba(28, 30, 29, .4); }
+.credit-closing { left: 17px; top: 18px; width: 215px; text-align: left; }
+.closing-in { position: relative; }
+.pdp-closing h2 { color: var(--white); }
+.closing-copy { margin-top: 24px; line-height: 19px; }
+.closing-copy a { text-decoration: underline; text-underline-offset: 3px; }
+.closing-copy a:hover { text-decoration-thickness: 2px; }
+.pdp-closing .signup { margin-top: 40px; }
+.pdp-closing .form-msg { margin-top: 4px; }
+
+/* ================= Tablet & up: roomier single column ================= */
+@media (min-width: 761px) {
+  .pdp-header { height: 88px; padding: 0 48px 0 38px; }
+  .pdp-logo { width: 118px; }
+  .pdp-nav { display: flex; gap: 71px; margin-left: 82px; font-size: 16px; line-height: 20px; }
+  .pdp-nav a { text-decoration: none; }
+  .pdp-nav a:hover { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+  .pdp-header .btn-outline { width: 240px; height: 66px; margin-left: auto; padding: 0 24px; font-size: 18px; }
+  .pdp-hero { grid-template-columns: 1fr 1fr; }
+  .pdp-intro-in { padding-top: 80px; padding-bottom: 96px; }
+  .credit-banner { left: 30px; top: 25px; }
+  .party-in, .dark-in { padding-left: 40px; padding-right: 40px; }
+  .pdp-details, .pdp-made { padding-left: 40px; padding-right: 40px; }
+  .spec-grid { grid-template-columns: repeat(4, 1fr); --gap: 32px; }
+  .spec:nth-child(odd) h3 { margin-right: 0; }
+  .spec:not(:nth-child(4n)) h3 { margin-right: calc(-1 * var(--gap)); }
+  .made-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+  .pdp-closing { padding: 120px 40px 130px; }
+}
+
+/* ================= Desktop: the design as drawn ================= */
+@media (min-width: 1200px) {
+  .pdp h1, .pdp h2 { font-size: 48px; line-height: 60px; }
+
+  .pdp-intro-in {
+    position: relative; max-width: 1440px; margin: 0 auto;
+    padding: 129px 0 134px calc(743 * var(--u));
+  }
+  .g-stage { --s: var(--u); position: absolute; left: calc(75 * var(--u)); top: calc(180 * var(--u)); margin: 0; }
+  .pdp-info { margin: 0; }
+  .pdp-info h1 { margin-bottom: 27px; }
+  .pdp-copy p + p { margin-top: 20px; }
+  .pdp-safe { margin-top: 65px; column-gap: 53px; }
+  .pdp-price { margin-top: 60px; }
+  .pdp-acc { margin-top: 54px; width: 480px; }
+  .pdp-cta { margin-top: 33px; }
+
+  .party-in {
+    position: relative; max-width: 1440px; margin: 0 auto;
+    display: flex; align-items: flex-start; gap: calc(140 * var(--u));
+    padding: 185px 0 188px calc(213 * var(--u));
+  }
+  .party-img { flex: none; width: calc(367 * var(--u)); margin: 0; }
+  .party-text { padding-top: 29px; max-width: 510px; }
+  .party-text h2 { margin-bottom: 27px; }
+
+  .dark-in { position: relative; max-width: 1440px; margin: 0 auto; padding: 0; height: calc(3051 * var(--u)); }
+  .d-a, .d-b, .d-c { display: contents; }
+  .d-a-text { position: absolute; left: calc(80 * var(--u)); top: calc(119 * var(--u)); width: 500px; }
+  .d-a-text h2 { margin-bottom: 27px; }
+  .c-stage { --s: var(--u); position: absolute; left: calc(759 * var(--u)); top: calc(102 * var(--u)); margin: 0; }
+  .caption { position: absolute; left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u)); width: 150px; margin: 0; }
+  .carving-img { position: absolute; left: calc(157 * var(--u)); top: calc(974 * var(--u)); width: calc(417 * var(--u)); max-width: none; margin: 0; }
+  .d-b-text { position: absolute; left: calc(820 * var(--u)); top: calc(1136 * var(--u)); width: 495px; }
+  .d-b-text h2 { margin-bottom: 27px; }
+  .kiln-img { position: absolute; left: calc(157 * var(--u)); top: calc(2020 * var(--u)); bottom: auto; width: calc(329 * var(--u)); }
+  .potter-img { position: absolute; left: calc(597 * var(--u)); top: calc(1804 * var(--u)); width: calc(687 * var(--u)); margin: 0; }
+
+  .pdp-details { padding: 96px calc(80 * var(--u)) 145px; }
+  .spec-grid { --gap: calc(107 * var(--u)); gap: 111px var(--gap); margin-top: 87px; }
+  .pdp-cta-c { margin-top: 108px; }
+
+  .pdp-made { padding: 104px 20px 130px; }
+  .made-lede { margin-top: 31px; }
+  .seal { margin-top: 51px; }
+  .made-grid { grid-template-columns: repeat(3, calc(361 * var(--u))); justify-content: center; gap: 0; margin-top: 89px; }
+  .made-grid p { margin-top: 54px; }
+  .made-grid .m1 { max-width: 170px; }
+  .made-grid .m2 { max-width: 213px; }
+  .made-grid .m3 { max-width: 165px; }
+
+  .pdp-closing { padding: 146px 20px 170px; }
+  .closing-copy { margin-top: 31px; }
+  .pdp-closing .signup { margin-top: 67px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acc-panel, .acc-ic::before, .acc-ic::after { transition: none; }
+}
+.pdp-copy p { letter-spacing: 0.008em; }
